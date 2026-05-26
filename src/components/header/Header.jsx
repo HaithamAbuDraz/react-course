@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   return (
-    <header>
+    <header style={{display: "flex", justifyContent: "space-around"}}>
       <a href='/'>Logo</a>
       <Navbar />
     </header>
