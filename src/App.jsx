@@ -4,11 +4,19 @@ import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
 
+const Form = () => {
+  return (
+    <form>
+      <label htmlFor='email'>Email</label>
+      <input type='email' id='email' placeholder='Enter your email' />
+    </form>
+  );
+};
+
 const App = () => {
   return (
     <>
-      <input type='email' placeholder='Enter your email' />
-      <button>Submit</button>
+      <Form />
     </>
   );
 };
