@@ -1,7 +1,9 @@
+import styles from './Header.modules.css';
+
 function Navbar() {
   return (
     <nav>
-      <ul>
+      <ul className={styles.list}>
         <li>
           <a href='/'>Home</a>
         </li>
