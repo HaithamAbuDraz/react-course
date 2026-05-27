@@ -1,9 +1,10 @@
 import Navbar from "./Navbar";
-import "./Header.css";
+// import "./Header.css";
+import styles from './Header.module.css';
 
 const Header = () => {
   return (
-    <header>
+    <header className={styles.header}>
       <a href='/'>Logo</a>
       <Navbar />
     </header>
