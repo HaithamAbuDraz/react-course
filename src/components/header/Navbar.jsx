@@ -1,14 +1,6 @@
 import styles from "./Header.module.css";
 
-function Navbar() {
-  const links = [
-    { title: "Home", url: "/" },
-    { title: "About", url: "/about" },
-    { title: "Contact", url: "/contact" },
-    { title: "Blog", url: "/blog" },
-    { title: "Profile", url: "/profile" },
-  ];
-  console.log(links);
+function Navbar({ links }) {
   return (
     <nav>
       <ul className={styles.list}>
