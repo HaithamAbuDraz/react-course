@@ -13,16 +13,16 @@ const App = () => {
   //   console.log("Hello, World!");
   // }
 
-  const sayHello = () => {
-    console.log("Hello, World!");
-  };
+  // const sayHello = () => {
+  //   console.log("Hello, World!");
+  // };
 
   return (
     <>
       {/* <Header />
       <Form />
       <Products products={products} /> */}
-      <button type='button' onClick={sayHello}>
+      <button type='button' onClick={() => console.log("Hello, World!")}>
         Click me
       </button>
     </>
