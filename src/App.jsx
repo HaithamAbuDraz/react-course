@@ -9,11 +9,18 @@ const App = () => {
     { title: "Laptop", desc: "this is a laptop", price: 500, rate: 3 },
     { title: "Mobile", desc: "this is a mobile", price: 350, rate: 5 },
   ];
+  function sayHello() {
+    console.log("Hello, World!");
+  }
+
   return (
     <>
-      <Header />
+      {/* <Header />
       <Form />
-      <Products products={products} />
+      <Products products={products} /> */}
+      <button type='button' onClick={sayHello}>
+        Click me
+      </button>
     </>
   );
 };
