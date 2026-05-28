@@ -1,36 +1,15 @@
-import Form from "./components/Form";
-import Header from "./components/header/Header";
 import "./App.css";
-import Products from "./components/products/Products";
-import Button from "./components/button/Button";
+import { useState } from "react";
 
 const App = () => {
-  const products = [
-    { title: "Pizza", desc: "this is a pizza", price: 120, rate: 4 },
-    { title: "Laptop", desc: "this is a laptop", price: 500, rate: 3 },
-    { title: "Mobile", desc: "this is a mobile", price: 350, rate: 5 },
-  ];
-  // function sayHello() {
-  //   console.log("Hello, World!");
-  // }
-
-  // const sayHello = () => {
-  //   console.log("Hello, World!");
-  // };
-
-  const sayHello = (name) => console.log(`Hello, ${name}!`);
-
+  const [count, setCount] = useState(0);
   return (
     <>
-      {/* <Header />
-      <Form />
-      <Products products={products} /> */}
-      <Button onClick={() => console.log("Click me button")}>
-        <span>Click me</span>
-      </Button>
-      <Button onClick={() => console.log("Click me again button")}>
-        <span>Click me again</span>
-      </Button>
+      <h1>Hello, World!</h1>
+      <div>Count: {count}</div>
+      <button type='button' onClick={() => setCount((prev) => prev + 1)}>
+        Increment
+      </button>
     </>
   );
 };
