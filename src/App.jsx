@@ -13,6 +13,9 @@ const App = () => {
       <button type='button' onClick={() => setCount((prev) => prev - 1)}>
         Decrement
       </button>
+      <button type='button' onClick={() => setCount(0)}>
+        Reset
+      </button>
     </>
   );
 };
