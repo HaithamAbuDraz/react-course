@@ -9,9 +9,13 @@ const App = () => {
     { title: "Laptop", desc: "this is a laptop", price: 500, rate: 3 },
     { title: "Mobile", desc: "this is a mobile", price: 350, rate: 5 },
   ];
-  function sayHello() {
+  // function sayHello() {
+  //   console.log("Hello, World!");
+  // }
+
+  const sayHello = () => {
     console.log("Hello, World!");
-  }
+  };
 
   return (
     <>
