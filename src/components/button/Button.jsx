@@ -1,11 +1,11 @@
-const Button = ({ text, onClick }) => {
+const Button = ({ onClick, children }) => {
   return (
     <button
       type='button'
       onClick={onClick}
       style={{ backgroundColor: "black", color: "white" }}
     >
-      {text}
+      {children}
     </button>
   );
 };
