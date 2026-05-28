@@ -10,6 +10,9 @@ const App = () => {
       <button type='button' onClick={() => setCount((prev) => prev + 1)}>
         Increment
       </button>
+      <button type='button' onClick={() => setCount((prev) => prev - 1)}>
+        Decrement
+      </button>
     </>
   );
 };
