@@ -25,8 +25,11 @@ const App = () => {
       {/* <Header />
       <Form />
       <Products products={products} /> */}
-      <Button text='Click me' />
-      <Button text='Click me again' />
+      <Button text='Click me' onClick={() => console.log("Click me button")} />
+      <Button
+        text='Click me again'
+        onClick={() => console.log("Click me again button")}
+      />
     </>
   );
 };
