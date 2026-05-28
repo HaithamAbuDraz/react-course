@@ -24,9 +24,13 @@ const App = () => {
       {/* <Header />
       <Form />
       <Products products={products} /> */}
-      <button type='button' onClick={(e) => {
-        sayHello("Haitham");
-      }}>
+      <button
+        type='button'
+        style={{ backgroundColor: "black", color: "white" }}
+        onClick={() => {
+          sayHello("Haitham");
+        }}
+      >
         Click me
       </button>
     </>
