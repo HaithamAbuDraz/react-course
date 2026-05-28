@@ -2,6 +2,7 @@ import Form from "./components/Form";
 import Header from "./components/header/Header";
 import "./App.css";
 import Products from "./components/products/Products";
+import Button from "./components/button/Button";
 
 const App = () => {
   const products = [
@@ -24,15 +25,8 @@ const App = () => {
       {/* <Header />
       <Form />
       <Products products={products} /> */}
-      <button
-        type='button'
-        style={{ backgroundColor: "black", color: "white" }}
-        onClick={() => {
-          sayHello("Haitham");
-        }}
-      >
-        Click me
-      </button>
+      <Button text='Click me' />
+      <Button text='Click me again' />
     </>
   );
 };
