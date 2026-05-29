@@ -4,9 +4,15 @@ import { useState } from 'react';
 const App = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ username: userName, password: password });
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor='username'>Username</label>
         <input
           type='text'
