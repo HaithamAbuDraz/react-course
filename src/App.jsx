@@ -7,6 +7,7 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (userName === '' || password === '') alert('Please fill in all fields!');
     console.log({ username: userName, password: password });
   };
 
