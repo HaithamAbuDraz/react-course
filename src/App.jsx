@@ -2,18 +2,20 @@ import "./App.css";
 import { useState } from "react";
 
 const App = () => {
-  const [firstName, setFirstName] = useState("Haitham");
-  const [lastName, setLastName] = useState("Mohammed");
+  const [user, setUser] = useState({
+    firstName: "Haitham",
+    lastName: "Mohammed",
+  });
   return (
     <>
       <h1>
-        Hello, {firstName} {lastName}
+        Hello, {user.firstName} {user.lastName}
       </h1>
-      <button type='button' onClick={() => setFirstName("Bilal")}>
-        Change FirstName
-      </button>
-      <button type='button' onClick={() => setLastName("Abu Draz")}>
-        Change LastName
+      <button
+        type='button'
+        onClick={() => setUser({ firstName: "Bilal", lastName: "Abu Draz" })}
+      >
+        Change user
       </button>
     </>
   );
