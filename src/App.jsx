@@ -1,22 +1,28 @@
+import { useEffect, useState } from 'react'; 
 import './App.css';
 
 const App = () => {
-  // fetch('https://jsonplaceholder.typicode.com/photos')
-  //   .then((res) => res.json())
-  //   .then((data) => console.log(data))
-  //   .catch((err) => console.log(err));
+  const [fetchedData, setFetchedData] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/photos');
+        const data = await res.json();
+        setFetchedData(data);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, []);
+  console.log(fetchedData);
 
-  const getData = async () => {
-    try {
-      const res = await fetch('https://jsonplaceholder.typicode.com/photos');
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  getData();
-  return <></>;
+  return (
+  <>
+  {JSON.stringify(fetchedData)}
+  </>
+  );
 };
 
 export default App;
