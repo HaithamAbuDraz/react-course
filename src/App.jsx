@@ -2,25 +2,29 @@ import './App.css';
 import { useState } from 'react';
 
 const App = () => {
-  const [user, setUser] = useState({
-    firstName: 'Haitham',
-    lastName: 'Mohammed',
-  });
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <>
-      <input
-        type='text'
-        placeholder='Enter your first name'
-        onChange={(e) => setUser({ ...user, firstName: e.target.value })}
-      />
-      <input
-        type='text'
-        placeholder='Enter your last name'
-        onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-      />
-      <h1>
-        Hello, {user.firstName} {user.lastName}
-      </h1>
+      <form>
+        <label htmlFor='username'>Username</label>
+        <input
+          type='text'
+          name='username'
+          id='username'
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <label htmlFor='password'>Password</label>
+        <input
+          type='password'
+          name='password'
+          id='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type='submit'>Login</button>
+      </form>
     </>
   );
 };
