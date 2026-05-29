@@ -13,7 +13,11 @@ const App = () => {
       </h1>
       <button
         type='button'
-        onClick={() => setUser({ firstName: "Bilal", lastName: "Abu Draz" })}
+        onClick={() =>
+          setUser((prev) => {
+            return { ...prev, lastName: "Abu Draz" };
+          })
+        }
       >
         Change user
       </button>
