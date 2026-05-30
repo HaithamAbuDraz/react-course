@@ -1,18 +1,12 @@
-import { useEffect, useRef } from 'react';
 import './App.css';
+import Middle from './components/Middle';
 
 const App = () => {
-  const shouldLog = useRef(true);
-  useEffect(() => {
-    if (shouldLog.current) {
-      shouldLog.current = false;
-      console.log('Hello, React!');
-    }
-  }, []);
-
+  const username = 'Haitham';
   return (
     <>
       <h1>Hello, Reacts</h1>
+      <Middle username={username} />
     </>
   );
 };
