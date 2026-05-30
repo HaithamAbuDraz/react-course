@@ -1,7 +1,13 @@
-const Last = ({ username }) => {
+import { UsernameContext } from "../App";
+
+const Last = () => {
   return (
     <div>
-      <h1>My username is {username}</h1>
+      <UsernameContext.Consumer>
+        {(username) => {
+          return <h1>My username is {username}</h1>
+        }}
+      </UsernameContext.Consumer>
     </div>
   );
 };
