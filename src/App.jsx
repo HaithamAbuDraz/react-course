@@ -1,16 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './App.css';
 
 const App = () => {
-  const listener = () => {
-    console.log('Hello');
-  };
+  const shouldLog = useRef(true);
   useEffect(() => {
-    document.addEventListener('click', listener);
-    return () => {
-      document.removeEventListener('click', listener);
-    };
-  });
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      console.log('Hello, React!');
+    }
+  }, []);
 
   return (
     <>
