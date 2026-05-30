@@ -3,14 +3,21 @@ import './App.css';
 
 const App = () => {
   const [fetchedData, setFetchedData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       try {
+        setIsLoading(true);
         const res = await fetch('https://jsonplaceholder.typicode.com/photos');
         const data = await res.json();
-        setFetchedData(data);
+        if (res.status === 200) {
+          setFetchedData(data);
+          setIsLoading(false);
+        }
         console.log(data);
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
       }
     };
@@ -18,14 +25,24 @@ const App = () => {
   }, []);
 
   return (
-    <ul>
-      {fetchedData.slice(0, 9).map((item) => (
-        <li key={item.id}>
-          <h2>{item.title}</h2>
-          <img src={item.url} alt={item.title} width='100px' height='100px' />
-        </li>
-      ))}
-    </ul>
+    <>
+      {isLoading && <h1>Loading...</h1>}
+      {isLoading === false && fetchedData && (
+        <ul>
+          {fetchedData.slice(0, 9).map((item) => (
+            <li key={item.id}>
+              <h2>{item.title}</h2>
+              <img
+                src={item.url}
+                alt={item.title}
+                width='100px'
+                height='100px'
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 
