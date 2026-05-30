@@ -1,9 +1,9 @@
 import Last from './Last';
 
-const Middle = ({ username }) => {
+const Middle = () => {
   return (
     <div>
-      <Last username={username} />
+      <Last />
     </div>
   );
 };
