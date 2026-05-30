@@ -4,6 +4,8 @@ import './App.css';
 const App = () => {
   const [fetchedData, setFetchedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
@@ -14,9 +16,13 @@ const App = () => {
         if (res.status === 200) {
           setFetchedData(data);
           setIsLoading(false);
+        } else {
+          setIsLoading(false);
+          setErrorMessage('Something went wrong');
         }
         console.log(data);
       } catch (err) {
+        setErrorMessage(JSON.stringify(err));
         setIsLoading(false);
         console.log(err);
       }
@@ -27,6 +33,7 @@ const App = () => {
   return (
     <>
       {isLoading && <h1>Loading...</h1>}
+      {!isLoading && errorMessage && <h1>{errorMessage}</h1>}
       {isLoading === false && fetchedData && (
         <ul>
           {fetchedData.slice(0, 9).map((item) => (
