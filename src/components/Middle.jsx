@@ -1,7 +1,9 @@
+import Last from './Last';
+
 const Middle = ({ username }) => {
   return (
     <div>
-      <h1>My username is {username}</h1>
+      <Last username={username} />
     </div>
   );
 };
