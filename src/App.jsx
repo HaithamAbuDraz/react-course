@@ -32,7 +32,17 @@ const dummyData = [
 ];
 
 const App = () => {
-  
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      await new Promise((resolve) =>
+        setTimeout(resolve, Math.random() * 6000 + 5000),
+      );
+      setProducts(dummyData);
+    };
+    getData();
+  }, []);
   return (
     <>
       <h1>Hello React</h1>
