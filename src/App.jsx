@@ -38,6 +38,9 @@ const App = () => {
   useEffect(() => {
     const getData = async () => {
       setIsLoadding(true);
+      await new Promise((resolve) =>
+        setTimeout(resolve, Math.random() * 6000 + 5000),
+      );
       setProducts(dummyData);
       setIsLoadding(false);
     };
