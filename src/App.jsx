@@ -33,19 +33,21 @@ const dummyData = [
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [isLoadding, setIsLoadding] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      await new Promise((resolve) =>
-        setTimeout(resolve, Math.random() * 6000 + 5000),
-      );
+      setIsLoadding(true);
       setProducts(dummyData);
+      setIsLoadding(false);
     };
     getData();
   }, []);
   return (
     <>
       <h1>Hello React</h1>
+      {isLoadding && <p>Loading...</p>}
+      {!isLoadding && products && <p>{JSON.stringify(products)}</p>}
     </>
   );
 };
