@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Products from './components/Products';
 
 const dummyData = [
   {
     id: 1,
     title:
       'HP OMEN 45L Gaming 5090 Desktop PC, Intel Core Ultra 9 285K, GeForce RTX 5090, 128GB DDR5, 4TB SSD, Support 4-Display 4K, Light Studio, HDMI, DP, Wi-Fi 6E, Windows 11 Pro, AI-Ready Workstation Desktop',
-    img: '	https://m.media-amazon.com/images/I/517L5CH1lXL._AC_UY436_FMwebp_QL65_.jpg',
+    img: 'https://m.media-amazon.com/images/I/517L5CH1lXL._AC_UY436_FMwebp_QL65_.jpg',
     rate: 3,
     price: 19891.86,
     insteadOf: 20145.86,
@@ -33,24 +34,25 @@ const dummyData = [
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [isLoadding, setIsLoadding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      setIsLoadding(true);
+      setIsLoading(true);
       await new Promise((resolve) =>
-        setTimeout(resolve, Math.random() * 6000 + 5000),
+        setTimeout(resolve, Math.random() * 6000 + 500),
       );
       setProducts(dummyData);
-      setIsLoadding(false);
+      setIsLoading(false);
     };
     getData();
   }, []);
+
   return (
     <>
       <h1>Hello React</h1>
-      {isLoadding && <p>Loading...</p>}
-      {!isLoadding && products && <p>{JSON.stringify(products)}</p>}
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && products.length > 0 && <Products products={products} />}
     </>
   );
 };
