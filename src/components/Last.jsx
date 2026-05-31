@@ -1,13 +1,11 @@
-import { UsernameContext } from "../App";
+import { useContext } from 'react';
+import { UsernameContext } from '../App';
 
 const Last = () => {
+  const username = useContext(UsernameContext);
   return (
     <div>
-      <UsernameContext.Consumer>
-        {(username) => {
-          return <h1>My username is {username}</h1>
-        }}
-      </UsernameContext.Consumer>
+      <h1>My username is {username}</h1>
     </div>
   );
 };
