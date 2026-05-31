@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import starIcon from '../assets/icons/star.png';
 
 const Product = ({ product }) => {
@@ -23,6 +24,9 @@ const Product = ({ product }) => {
       <p style={{ textDecoration: 'line-through' }}>
         Instead Of: {product.insteadOf} ils
       </p>
+      <button type='button' onClick={() => toast('Product added to cart!')}>
+        Add to Cart
+      </button>
     </li>
   );
 };
