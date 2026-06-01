@@ -1,10 +1,9 @@
 import toast from 'react-hot-toast';
 import starIcon from '../assets/icons/star.png';
-import { ShoppingCartContext } from '../context/ShoppingCartContext';
-import { useContext } from 'react';
+import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const Product = ({ product }) => {
-  const { setCartItems } = useContext(ShoppingCartContext);
+  const { setCartItems } = useShoppingCartContext();
 
   const handleClick = (product) => {
     toast('Product added to cart!');
