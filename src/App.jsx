@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Products from './components/Products';
+import CartItems from './components/CartItems';
 
 const dummyData = [
   {
@@ -56,6 +57,7 @@ const App = () => {
       {!isLoading && products.length > 0 && (
         <Products products={products} setCartItems={setCartItems} />
       )}
+      <CartItems cartItems={cartItems} />
     </>
   );
 };
