@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-export const ShoppingCartContext = createContext({});
+// eslint-disable-next-line react-refresh/only-export-components
+const ShoppingCartContext = createContext({});
 
 const initialCartItems = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -21,3 +22,8 @@ const ShoppingCartContextProvider = ({ children }) => {
 };
 
 export default ShoppingCartContextProvider;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useShoppingCartContext = () => {
+  return useContext(ShoppingCartContext);
+};
