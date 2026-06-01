@@ -1,7 +1,13 @@
 import toast from 'react-hot-toast';
 import starIcon from '../assets/icons/star.png';
 
-const Product = ({ product }) => {
+const Product = ({ product, setCartItems }) => {
+  const handleClick = (product) => {
+    toast('Product added to cart!');
+    setCartItems(prev => {
+      return [...prev, product];
+    });
+  };
   return (
     <li>
       <img src={product.img} alt={product.title} width='100px' height='100px' />
@@ -24,7 +30,7 @@ const Product = ({ product }) => {
       <p style={{ textDecoration: 'line-through' }}>
         Instead Of: {product.insteadOf} ils
       </p>
-      <button type='button' onClick={() => toast('Product added to cart!')}>
+      <button type='button' onClick={() => handleClick(product)}>
         Add to Cart
       </button>
     </li>
