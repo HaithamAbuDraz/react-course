@@ -35,6 +35,7 @@ const dummyData = [
 const App = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -52,7 +53,9 @@ const App = () => {
     <>
       <h1>Hello React</h1>
       {isLoading && <p>Loading...</p>}
-      {!isLoading && products.length > 0 && <Products products={products} />}
+      {!isLoading && products.length > 0 && (
+        <Products products={products} setCartItems={setCartItems} />
+      )}
     </>
   );
 };
