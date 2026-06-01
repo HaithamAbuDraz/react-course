@@ -33,10 +33,14 @@ const dummyData = [
   },
 ];
 
+const initialCartItems = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : [];
+
 const App = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(initialCartItems);
 
   useEffect(() => {
     const getData = async () => {
@@ -49,6 +53,10 @@ const App = () => {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <>
