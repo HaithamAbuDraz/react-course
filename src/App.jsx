@@ -33,14 +33,9 @@ const dummyData = [
   },
 ];
 
-const initialCartItems = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
-  : [];
-
 const App = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [cartItems, setCartItems] = useState(initialCartItems);
 
   useEffect(() => {
     const getData = async () => {
@@ -54,18 +49,14 @@ const App = () => {
     getData();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
-
   return (
     <>
       <h1>Hello React</h1>
       {isLoading && <p>Loading...</p>}
-      {!isLoading && products.length > 0 && (
-        <Products products={products} setCartItems={setCartItems} />
+      {!isLoading && products && (
+        <Products products={products} />
       )}
-      <CartItems cartItems={cartItems} />
+      <CartItems />
     </>
   );
 };
