@@ -4,12 +4,15 @@ import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import ShoppingCartContextProvider from './context/ShoppingCartContext.jsx';
+import CountContextProvider from './context/CountContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Toaster />
     <ShoppingCartContextProvider>
-      <App />
+      <CountContextProvider>
+        <App />
+      </CountContextProvider>
     </ShoppingCartContextProvider>
   </StrictMode>,
 );
