@@ -2,12 +2,15 @@ import { useReducer } from 'react';
 import './App.css';
 
 const reducer = (state, action) => {
-  if (action === 'increment') {
-    return state + 1;
-  } else if (action === 'decrement') {
-    return state - 1;
-  } else if (action === 'reset') {
-    return 0;
+  switch (action) {
+    case 'increment':
+      return state + 1;
+    case 'decrement':
+      return state - 1;
+    case 'reset':
+      return 0;
+    default:
+      return state;
   }
 };
 
