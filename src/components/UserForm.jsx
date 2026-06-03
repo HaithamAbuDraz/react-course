@@ -1,4 +1,5 @@
 import useInput from '../hooks/useInput';
+import Input from './Input';
 
 const UserForm = () => {
   const [firstName, bindFirstName, resetFirstName] = useInput('');
@@ -11,11 +12,16 @@ const UserForm = () => {
     resetLastName();
   };
 
+  const formFields = [
+    { placeholder: 'Enter your first name', ...bindFirstName },
+    { placeholder: 'Enter your last name', ...bindLastName },
+  ];
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input placeholder='Enter your first name' {...bindFirstName} />
-        <input placeholder='Enter your last name' {...bindLastName} />
+        {formFields.map((forField, index) => (
+          <Input key={index} {...forField} />
+        ))}
         <button type='submit'>Submit</button>
       </form>
     </div>
