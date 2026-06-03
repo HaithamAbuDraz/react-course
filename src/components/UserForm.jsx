@@ -12,14 +12,14 @@ const UserForm = () => {
     resetLastName();
   };
 
-  const formFields = [
+  const formFilds = [
     { placeholder: 'Enter your first name', ...bindFirstName },
     { placeholder: 'Enter your last name', ...bindLastName },
   ];
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {formFields.map((forField, index) => (
+        {formFilds.map((forField, index) => (
           <Input key={index} {...forField} />
         ))}
         <button type='submit'>Submit</button>
