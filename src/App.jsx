@@ -1,15 +1,11 @@
 import './App.css';
-import ComponentA from './components/ComponentA';
-import ComponentB from './components/ComponentB';
-import ComponentC from './components/ComponentC';
+import UserForm from './components/UserForm';
 
 const App = () => {
   return (
     <>
       <div>
-        <ComponentA />
-        <ComponentB />
-        <ComponentC />
+        <UserForm />
       </div>
     </>
   );
