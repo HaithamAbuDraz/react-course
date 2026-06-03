@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 const App = () => {
   const intervalRef = useRef(null);
+  const inputRef = useRef(null);
+
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
@@ -10,6 +12,10 @@ const App = () => {
     }, 1000);
 
     return () => clearInterval(intervalRef.current);
+  }, []);
+
+  useEffect(() => {
+    inputRef.current.focus();
   }, []);
 
   return (
@@ -22,6 +28,7 @@ const App = () => {
         >
           Stop Timer
         </button>
+        <input ref={inputRef} type='email' placeholder='Enter your email' />
       </div>
     </>
   );
