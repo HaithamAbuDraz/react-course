@@ -1,37 +1,21 @@
-import { useState } from 'react';
+import useInput from '../hooks/useInput';
 
 const UserForm = () => {
-  const [user, setUser] = useState({ firstName: '', lastName: '' });
+  const [firstName, bindFirstName, resetFirstName] = useInput('');
+  const [lastName, bindLastName, resetLastName] = useInput('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Hello ${user.firstName} ${user.lastName}`);
-    setUser({ firstName: '', lastName: '' });
+    alert(`Hello ${firstName} ${lastName}`);
+    resetFirstName();
+    resetLastName();
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Enter your first name'
-          value={user.firstName}
-          onChange={(e) =>
-            setUser((prev) => {
-              return { ...prev, firstName: e.target.value };
-            })
-          }
-        />
-        <input
-          type='text'
-          placeholder='Enter your last name'
-          value={user.lastName}
-          onChange={(e) =>
-            setUser((prev) => {
-              return { ...prev, lastName: e.target.value };
-            })
-          }
-        />
+        <input placeholder='Enter your first name' {...bindFirstName} />
+        <input placeholder='Enter your last name' {...bindLastName} />
         <button type='submit'>Submit</button>
       </form>
     </div>
