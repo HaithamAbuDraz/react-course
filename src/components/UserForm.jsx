@@ -6,6 +6,7 @@ const UserForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Hello ${user.firstName} ${user.lastName}`);
+    setUser({ firstName: '', lastName: '' });
   };
 
   return (
