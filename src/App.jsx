@@ -1,28 +1,29 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
+import Count from './components/Count';
+import Button from './components/Button';
+import Title from './components/Title';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+  const [age, setAge] = useState(23);
+  const [salary, setSalary] = useState(8000);
 
-  const calculateSum = (nums) => {
-    console.log('Calculating sum...');
-    return nums.reduce((acc, curr) => acc + curr, 0);
+  const incrementAge = () => {
+    setAge(age + 1);
   };
 
-  const sum = useMemo(() => calculateSum(numbers), [numbers]);
+  const incrementSalary = () => {
+    setSalary(salary + 1000);
+  };
 
   return (
     <>
       <div>
-        <h1>Hello React!</h1>
-        <p>Sum of numbers {sum}</p>
-        <button onClick={() => setCount(count + 1)}>
-          Increment Counter ({count})
-        </button>
-        <button onClick={() => setNumbers([...numbers, numbers.length + 1])}>
-          Add Number to Array
-        </button>
+        <Title />
+        <Count text='Age' count={age} />
+        <Count text='Salary' count={salary} />
+        <Button onClick={incrementAge}>Increment Age</Button>
+        <Button onClick={incrementSalary}>Increment Salary</Button>
       </div>
     </>
   );
