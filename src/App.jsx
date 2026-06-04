@@ -1,25 +1,28 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import './App.css';
-import RenderName from './components/RenderName';
 
 const App = () => {
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
+  const [count, setCount] = useState(0);
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+
+  const calculateSum = (nums) => {
+    console.log('Calculating sum...');
+    return nums.reduce((acc, curr) => acc + curr, 0);
+  };
+
+  const sum = useMemo(() => calculateSum(numbers), [numbers]);
+
   return (
     <>
       <div>
-        <input
-          type='text'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type='text'
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <RenderName name={name} />
-        <h2>Address: {address}</h2>
+        <h1>Hello React!</h1>
+        <p>Sum of numbers {sum}</p>
+        <button onClick={() => setCount(count + 1)}>
+          Increment Counter ({count})
+        </button>
+        <button onClick={() => setNumbers([...numbers, numbers.length + 1])}>
+          Add Number to Array
+        </button>
       </div>
     </>
   );
