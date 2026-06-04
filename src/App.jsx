@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import './App.css';
 import Count from './components/Count';
 import Button from './components/Button';
@@ -8,13 +8,13 @@ const App = () => {
   const [age, setAge] = useState(23);
   const [salary, setSalary] = useState(8000);
 
-  const incrementAge = () => {
+  const incrementAge = useCallback(() => {
     setAge(age + 1);
-  };
+  }, [age]);
 
-  const incrementSalary = () => {
+  const incrementSalary = useCallback(() => {
     setSalary(salary + 1000);
-  };
+  }, [salary]);
 
   return (
     <>
