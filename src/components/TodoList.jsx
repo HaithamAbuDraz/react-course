@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useOptimistic, useRef, useState, startTransition } from 'react';
 
 const initialTodos = [
   { id: 1, title: 'Learn React' },
@@ -7,6 +7,7 @@ const initialTodos = [
 
 const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
+  const [optimisticTodos, setOptimisticTodos] = useOptimistic(todos);
   const inputRef = useRef(null);
 
   async function onSubmit(e) {
@@ -14,8 +15,15 @@ const TodoList = () => {
 
     if (inputRef.current == null) return;
 
-    const newTodo = await createTodo(inputRef.current.value);
-    setTodos((prev) => [...prev, newTodo]);
+    startTransition(async () => {
+      const optimisticTodo = {
+        id: crypto.randomUUID(),
+        title: inputRef.current.value,
+      };
+      setOptimisticTodos((prev) => [...prev, optimisticTodo]);
+      const newTodo = await createTodo(inputRef.current.value);
+      setTodos((prev) => [...prev, newTodo]);
+    });
   }
 
   return (
@@ -27,7 +35,7 @@ const TodoList = () => {
         <button type='submit'>Add Todo</button>
       </form>
       <ul>
-        {todos.map((todo) => (
+        {optimisticTodos.map((todo) => (
           <li
             key={todo.id}
             style={{
