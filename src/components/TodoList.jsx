@@ -28,7 +28,14 @@ const TodoList = () => {
       </form>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <li
+            key={todo.id}
+            style={{
+              opacity: todo.isPending ? '0.5' : undefined,
+            }}
+          >
+            {todo.title}
+          </li>
         ))}
       </ul>
     </div>
