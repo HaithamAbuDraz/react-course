@@ -9,10 +9,20 @@ const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
   const inputRef = useRef(null);
 
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    if (inputRef.current == null) return;
+
+    const newTodo = await createTodo(inputRef.current.value);
+    setTodos((prev) => [...prev, newTodo]);
+  }
+
   return (
     <div>
       <h1>Todo List</h1>
-      <form>
+
+      <form onSubmit={onSubmit}>
         <input type='text' ref={inputRef} placeholder='Add a new todo' />
         <button type='submit'>Add Todo</button>
       </form>
@@ -26,3 +36,13 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
+function createTodo(title) {
+  return wait({ id: crypto.randomUUID(), title }, 1000);
+}
+
+function wait(value, duration) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value), duration);
+  });
+}
