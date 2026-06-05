@@ -53,7 +53,7 @@ const TodoList = () => {
 export default TodoList;
 
 function createTodo(title) {
-  return wait({ id: crypto.randomUUID(), title }, 1000);
+  return wait({ id: crypto.randomUUID(), title: `${title} - Server` }, 1000);
 }
 
 function wait(value, duration) {
