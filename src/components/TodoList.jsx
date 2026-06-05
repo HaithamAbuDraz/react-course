@@ -1,8 +1,8 @@
 import { useOptimistic, useRef, useState, startTransition } from 'react';
 
 const initialTodos = [
-  { id: 1, title: 'Learn React' },
-  { id: 2, title: 'Build a Todo App' },
+  { id: 1, title: 'Learn React', isPending: false },
+  { id: 2, title: 'Build a Todo App', isPending: false },
 ];
 
 const TodoList = () => {
@@ -19,6 +19,7 @@ const TodoList = () => {
       const optimisticTodo = {
         id: crypto.randomUUID(),
         title: inputRef.current.value,
+        isPending: true,
       };
       setOptimisticTodos((prev) => [...prev, optimisticTodo]);
       const newTodo = await createTodo(inputRef.current.value);
@@ -53,7 +54,7 @@ const TodoList = () => {
 export default TodoList;
 
 function createTodo(title) {
-  return wait({ id: crypto.randomUUID(), title: `${title} - Server` }, 1000);
+  return wait({ id: crypto.randomUUID(), title, isPending: false }, 1000);
 }
 
 function wait(value, duration) {
