@@ -5,9 +5,21 @@ const initialTodos = [
   { id: 2, title: 'Build a Todo App', isPending: false },
 ];
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD':
+      return [
+        ...state,
+        { id: crypto.randomUUID(), title: action.payload, isPending: true },
+      ];
+    default:
+      throw new Error('Not valid');
+  }
+};
+
 const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
-  const [optimisticTodos, setOptimisticTodos] = useOptimistic(todos);
+  const [optimisticTodos, dispatch] = useOptimistic(todos, reducer);
   const inputRef = useRef(null);
 
   async function onSubmit(e) {
@@ -16,12 +28,7 @@ const TodoList = () => {
     if (inputRef.current == null) return;
 
     startTransition(async () => {
-      const optimisticTodo = {
-        id: crypto.randomUUID(),
-        title: inputRef.current.value,
-        isPending: true,
-      };
-      setOptimisticTodos((prev) => [...prev, optimisticTodo]);
+      dispatch({ type: 'ADD', payload: inputRef.current.value });
       const newTodo = await createTodo(inputRef.current.value);
       setTodos((prev) => [...prev, newTodo]);
     });
