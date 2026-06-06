@@ -1,5 +1,5 @@
-import { useOptimistic, useRef, useState, startTransition } from 'react';
-import { useFormStates } from 'react-dom';
+import { useOptimistic, useState, startTransition } from 'react';
+import { useFormStatus } from 'react-dom';
 
 const initialTodos = [
   { id: 1, title: 'Learn React', isPending: false },
@@ -21,25 +21,16 @@ const reducer = (state, action) => {
 const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
   const [optimisticTodos, dispatch] = useOptimistic(todos, reducer);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const inputRef = useRef(null);
 
-  async function onSubmit(e) {
-    e.preventDefault();
-
-    if (inputRef.current == null) return;
-
-    setIsSubmitting(true);
+  async function handleForm(formData) {
+    const title = formData.get('title');
+    if (typeof title !== 'string') return;
 
     startTransition(async () => {
-      dispatch({ type: 'ADD', payload: inputRef.current.value });
+      dispatch({ type: 'ADD', payload: title });
 
-      try {
-        const newTodo = await createTodo(inputRef.current.value);
-        setTodos((prev) => [...prev, newTodo]);
-      } finally {
-        setIsSubmitting(false);
-      }
+      const newTodo = await createTodo(title);
+      setTodos((prev) => [...prev, newTodo]);
     });
   }
 
@@ -47,8 +38,8 @@ const TodoList = () => {
     <div>
       <h1>Todo List</h1>
 
-      <form onSubmit={onSubmit}>
-        <input type='text' ref={inputRef} placeholder='Add a new todo' />
+      <form action={handleForm}>
+        <input type='text' placeholder='Add a new todo' name='title' />
         <SubmitButton />
       </form>
 
@@ -71,10 +62,11 @@ const TodoList = () => {
 export default TodoList;
 
 const SubmitButton = () => {
-  const pending = useFormStates();
+  const data = useFormStatus();
+  console.log(data);
   return (
-    <button type='submit' disabled={pending}>
-      {pending ? 'Adding...' : 'Add Todo'}
+    <button type='submit' disabled={data.pending}>
+      {data.pending ? 'Adding...' : 'Add Todo'}
     </button>
   );
 };
