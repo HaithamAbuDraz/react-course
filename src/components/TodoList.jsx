@@ -1,5 +1,5 @@
 import { useOptimistic, useState, startTransition } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 
 const initialTodos = [
   { id: 1, title: 'Learn React', isPending: false },
@@ -22,9 +22,9 @@ const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
   const [optimisticTodos, dispatch] = useOptimistic(todos, reducer);
 
-  async function handleForm(formData) {
+  async function handleForm(prevState, formData) {
     const title = formData.get('title');
-    if (typeof title !== 'string') return;
+    if (typeof title !== 'string') return { message: 'Wrong Text' };
 
     startTransition(async () => {
       dispatch({ type: 'ADD', payload: title });
@@ -34,11 +34,14 @@ const TodoList = () => {
     });
   }
 
+  const [state, action] = useFormState(handleForm, {});
+  console.log(state);
+
   return (
     <div>
       <h1>Todo List</h1>
 
-      <form action={handleForm}>
+      <form action={action}>
         <input type='text' placeholder='Add a new todo' name='title' />
         <SubmitButton />
       </form>
