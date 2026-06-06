@@ -1,4 +1,5 @@
 import { useOptimistic, useRef, useState, startTransition } from 'react';
+import { useFormStates } from 'react-dom';
 
 const initialTodos = [
   { id: 1, title: 'Learn React', isPending: false },
@@ -48,9 +49,7 @@ const TodoList = () => {
 
       <form onSubmit={onSubmit}>
         <input type='text' ref={inputRef} placeholder='Add a new todo' />
-        <button type='submit' disabled={isSubmitting}>
-          {isSubmitting ? 'Adding...' : 'Add Todo'}
-        </button>
+        <SubmitButton />
       </form>
 
       <ul>
@@ -70,6 +69,15 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
+const SubmitButton = () => {
+  const pending = useFormStates();
+  return (
+    <button type='submit' disabled={pending}>
+      {pending ? 'Adding...' : 'Add Todo'}
+    </button>
+  );
+};
 
 function createTodo(title) {
   return wait({ id: crypto.randomUUID(), title, isPending: false }, 1000);
