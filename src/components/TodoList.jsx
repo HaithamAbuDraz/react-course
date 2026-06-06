@@ -13,13 +13,14 @@ const reducer = (state, action) => {
         { id: crypto.randomUUID(), title: action.payload, isPending: true },
       ];
     default:
-      throw new Error('Not valid');
+      return state;
   }
 };
 
 const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
   const [optimisticTodos, dispatch] = useOptimistic(todos, reducer);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef(null);
 
   async function onSubmit(e) {
@@ -27,10 +28,17 @@ const TodoList = () => {
 
     if (inputRef.current == null) return;
 
+    setIsSubmitting(true);
+
     startTransition(async () => {
       dispatch({ type: 'ADD', payload: inputRef.current.value });
-      const newTodo = await createTodo(inputRef.current.value);
-      setTodos((prev) => [...prev, newTodo]);
+
+      try {
+        const newTodo = await createTodo(inputRef.current.value);
+        setTodos((prev) => [...prev, newTodo]);
+      } finally {
+        setIsSubmitting(false);
+      }
     });
   }
 
@@ -40,8 +48,11 @@ const TodoList = () => {
 
       <form onSubmit={onSubmit}>
         <input type='text' ref={inputRef} placeholder='Add a new todo' />
-        <button type='submit'>Add Todo</button>
+        <button type='submit' disabled={isSubmitting}>
+          {isSubmitting ? 'Adding...' : 'Add Todo'}
+        </button>
       </form>
+
       <ul>
         {optimisticTodos.map((todo) => (
           <li
